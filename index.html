@@ -1,0 +1,1910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>JIO PLAY</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #070913;
+  --bg-mesh:
+    radial-gradient(circle at 12% 6%, rgba(139, 92, 246, 0.28) 0%, transparent 45%),
+    radial-gradient(circle at 88% 12%, rgba(236, 72, 153, 0.22) 0%, transparent 46%),
+    radial-gradient(circle at 50% 95%, rgba(6, 182, 212, 0.18) 0%, transparent 50%),
+    linear-gradient(175deg, #070913 0%, #0d1124 52%, #080b18 100%);
+  --fg: #f8fafc;
+  --mut: #9ca3af;
+  --bd: rgba(139, 92, 246, 0.28);
+  --bd-strong: rgba(167, 139, 250, 0.52);
+  --ac: #a78bfa;
+  --ac-soft: rgba(124, 58, 237, 0.16);
+  --card: rgba(15, 20, 42, 0.9);
+  --card-solid: #111732;
+  --surface-2: #171f42;
+  --ok: #34d399;
+  --err: #fb7185;
+  --err-soft: rgba(244, 63, 94, 0.14);
+  --warn-bg: rgba(245, 158, 11, 0.12);
+  --warn-bd: rgba(251, 191, 36, 0.42);
+  --shadow-sm: 0 4px 14px rgba(2, 6, 23, 0.45);
+  --shadow-md: 0 16px 40px rgba(2, 6, 23, 0.68);
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #1e1b4b;
+    --bg-mesh:
+      radial-gradient(circle at 12% 6%, rgba(124, 58, 237, 0.34) 0%, transparent 45%),
+      radial-gradient(circle at 88% 12%, rgba(236, 72, 153, 0.26) 0%, transparent 46%),
+      radial-gradient(circle at 50% 95%, rgba(14, 165, 233, 0.24) 0%, transparent 50%),
+      linear-gradient(175deg, #17153b 0%, #1e1b4b 55%, #131130 100%);
+    --fg: #f8fafc;
+    --mut: #cbd5e1;
+    --bd: rgba(196, 181, 253, 0.28);
+    --bd-strong: rgba(216, 180, 254, 0.55);
+    --ac: #c4b5fd;
+    --ac-soft: rgba(139, 92, 246, 0.2);
+    --card: rgba(26, 23, 62, 0.92);
+    --card-solid: #1e1b4b;
+    --surface-2: #282461;
+    --ok: #34d399;
+    --err: #fda4af;
+    --err-soft: rgba(244, 63, 94, 0.18);
+    --warn-bg: rgba(251, 191, 36, 0.14);
+    --warn-bd: rgba(251, 191, 36, 0.45);
+    --shadow-sm: 0 4px 14px rgba(10, 8, 30, 0.38);
+    --shadow-md: 0 16px 40px rgba(10, 8, 30, 0.58);
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0 auto;
+  background-color: var(--bg);
+  background-image: var(--bg-mesh);
+  background-attachment: fixed;
+  min-height: 100vh;
+  color: var(--fg);
+  font-family: "Plus Jakarta Sans", "Outfit", system-ui, -apple-system, sans-serif;
+  font-size: 16px;
+  line-height: 1.45;
+  max-width: 540px;
+  padding: 12px 12px 28px;
+}
+
+/* Main Website Shell with Neon-Violet & Cyan Border Glow */
+.site-shell {
+  background: var(--card);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1.5px solid var(--bd-strong);
+  border-radius: 24px;
+  padding: 13px;
+  box-shadow: var(--shadow-md), 0 0 0 1px rgba(124, 58, 237, 0.16);
+  position: relative;
+}
+
+/* Top Header with Custom SVG Vector Graphics & Wordmark (No JP Emblem) */
+header {
+  display: grid;
+  grid-template-columns: 44px 1fr 44px;
+  align-items: center;
+  background:
+    radial-gradient(circle at 80% 20%, rgba(236, 72, 153, 0.24), transparent 55%),
+    linear-gradient(135deg, #13102b 0%, #24174e 52%, #112240 100%);
+  border: 1.5px solid rgba(167, 139, 250, 0.52);
+  border-radius: 18px;
+  padding: 10px;
+  margin-bottom: 12px;
+  box-shadow: 0 10px 26px rgba(6, 8, 24, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  position: relative;
+  overflow: hidden;
+}
+header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.11) 1px, transparent 0);
+  background-size: 14px 14px;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.menu-btn {
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(196, 181, 253, 0.35);
+  color: #fff;
+  z-index: 1;
+}
+.menu-btn:hover {
+  background: rgba(139, 92, 246, 0.25);
+  border-color: #c4b5fd;
+}
+.menu-btn span {
+  display: block;
+  width: 18px;
+  height: 2.3px;
+  background: linear-gradient(90deg, #38bdf8, #e879f9);
+  border-radius: 99px;
+}
+
+.brand-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  z-index: 1;
+}
+.brand-wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Outfit", system-ui, sans-serif;
+  font-size: 25px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.05;
+}
+.brand-jio {
+  background: linear-gradient(135deg, #38bdf8 0%, #818cf8 55%, #c084fc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 12px rgba(99, 102, 241, 0.45));
+}
+.brand-play {
+  background: linear-gradient(135deg, #fbbf24 0%, #f472b6 55%, #fb7185 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 12px rgba(244, 114, 182, 0.45));
+}
+.brand-ribbon {
+  width: 112px;
+  height: 6px;
+  margin-top: 3px;
+}
+
+.home-dot-btn {
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border-radius: 13px;
+  background: linear-gradient(135deg, #06b6d4 0%, #8b5cf6 55%, #ec4899 100%);
+  color: #ffffff;
+  border: 1.5px solid rgba(255, 255, 255, 0.36);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 18px rgba(139, 92, 246, 0.48);
+  z-index: 1;
+}
+.home-dot-btn:hover { filter: brightness(1.12); transform: translateY(-1px); }
+
+/* Drawer Navigation */
+.drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 6, 15, 0.72);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  z-index: 90;
+}
+.drawer {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  bottom: 10px;
+  width: 280px;
+  max-width: 82vw;
+  background: var(--card-solid);
+  border: 1.5px solid var(--bd-strong);
+  border-radius: 22px;
+  z-index: 100;
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  box-shadow: 14px 0 40px rgba(0, 0, 0, 0.65);
+}
+.drawer-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  margin-bottom: 4px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #171336 0%, #2a1857 100%);
+  border: 1px solid rgba(167, 139, 250, 0.42);
+}
+.drawer-close {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border-radius: 10px;
+  background: rgba(244, 63, 94, 0.22);
+  color: #fda4af;
+  border: 1px solid rgba(251, 113, 133, 0.5);
+  font-weight: 800;
+}
+.nav-item {
+  width: 100%;
+  text-align: left;
+  padding: 13px 14px;
+  border-radius: 14px;
+  border: 1.5px solid var(--bd);
+  background: var(--surface-2);
+  color: var(--fg);
+  font-family: "Outfit", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-item.on {
+  background: linear-gradient(135deg, #7c3aed 0%, #db2777 100%);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.42);
+  box-shadow: 0 6px 18px rgba(124, 58, 237, 0.45);
+}
+.nav-pill {
+  font-size: 12px;
+  font-weight: 800;
+  padding: 2px 9px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.22);
+}
+.nav-item:not(.on) .nav-pill {
+  background: rgba(139, 92, 246, 0.22);
+  color: #ddd6fe;
+  border: 1px solid rgba(167, 139, 250, 0.35);
+}
+
+/* Controls & Expressive Action Buttons */
+select, input, button, textarea {
+  font-family: inherit;
+  color: var(--fg);
+  background: var(--surface-2);
+  border: 1.5px solid var(--bd);
+  border-radius: 13px;
+  padding: 10px 12px;
+}
+select:focus, input:focus, textarea:focus {
+  outline: none;
+  border-color: #c084fc;
+  box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.26);
+}
+
+button {
+  cursor: pointer;
+  font-family: "Outfit", "Plus Jakarta Sans", sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  transition: transform 0.1s ease, box-shadow 0.18s ease, filter 0.18s ease;
+  position: relative;
+  overflow: hidden;
+}
+button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 20%, rgba(255, 255, 255, 0.2) 50%, transparent 80%);
+  transform: translateX(-100%);
+  transition: transform 0.45s ease;
+  pointer-events: none;
+}
+button:hover::after { transform: translateX(100%); }
+button:hover { transform: translateY(-1px); filter: brightness(1.08); }
+button:active { transform: scale(0.97); }
+
+button.btn-primary {
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  color: #fff;
+  border: 1.5px solid #a5b4fc;
+  box-shadow: 0 6px 18px rgba(79, 70, 229, 0.42);
+}
+button.btn-add-entry {
+  background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 52%, #8b5cf6 100%);
+  color: #ffffff;
+  border: 1.5px solid rgba(125, 211, 252, 0.72);
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  padding: 14px 16px;
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+button.btn-gen {
+  background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 55%, #6366f1 100%);
+  color: #ffffff;
+  border: 1.5px solid rgba(249, 168, 212, 0.72);
+  font-size: 15px;
+  letter-spacing: 0.07em;
+  padding: 14px 14px;
+  box-shadow: 0 8px 24px rgba(219, 39, 119, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.32);
+}
+button.btn-rename {
+  background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);
+  color: #fff;
+  border: 1.5px solid #fde68a;
+  box-shadow: 0 5px 15px rgba(234, 88, 12, 0.35);
+  padding: 10px 9px;
+  font-size: 11.5px;
+  letter-spacing: 0.02em;
+  gap: 4px;
+  white-space: nowrap;
+}
+button.btn-new-head {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #fff;
+  border: 1.5px solid #6ee7b7;
+  box-shadow: 0 5px 15px rgba(16, 185, 129, 0.35);
+  padding: 10px 10px;
+  font-size: 11.5px;
+  letter-spacing: 0.02em;
+  gap: 4px;
+  white-space: nowrap;
+}
+button.btn-clear {
+  background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+  color: #e2e8f0;
+  border: 1.5px solid #64748b;
+}
+button.btn-bt {
+  background: linear-gradient(135deg, #06b6d4 0%, #0284c7 100%);
+  color: #fff;
+  border: 1.5px solid #67e8f9;
+  font-size: 14px;
+  padding: 12px 14px;
+  box-shadow: 0 6px 18px rgba(6, 182, 212, 0.38);
+}
+button.btn-copy {
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  color: #fff;
+  border: 1.5px solid #a5b4fc;
+}
+button.btn-share {
+  background: linear-gradient(135deg, #10b981 0%, #0d9488 100%);
+  color: #fff;
+  border: 1.5px solid #6ee7b7;
+}
+button.btn-print {
+  background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%);
+  color: #fff;
+  border: 1.5px solid #d8b4fe;
+}
+button.danger {
+  background: linear-gradient(135deg, #f43f5e 0%, #be123c 100%);
+  color: #fff;
+  border: 1.5px solid #fda4af;
+  box-shadow: 0 6px 18px rgba(225, 29, 72, 0.38);
+}
+
+.row { display: flex; gap: 7px; margin: 9px 0; }
+.row > * { flex: 1; min-width: 0; }
+
+/* Richly Bordered Dark-Violet / Indigo Sections */
+.head-box {
+  background:
+    linear-gradient(135deg, rgba(99, 102, 241, 0.16) 0%, rgba(168, 85, 247, 0.12) 100%),
+    var(--card-solid);
+  border: 1.5px solid rgba(167, 139, 250, 0.45);
+  border-radius: 17px;
+  padding: 9px;
+  margin: 0 0 11px;
+  box-shadow: var(--shadow-sm);
+}
+.head-box .row { margin: 0; align-items: center; }
+.head-box .row + .row { margin-top: 8px; }
+#head {
+  flex: 1.45 1 0;
+  min-width: 0;
+  font-family: "Outfit", sans-serif;
+  font-weight: 800;
+  font-size: 14.5px;
+  letter-spacing: 0.03em;
+  padding: 10px 8px 10px 10px;
+  border: 1.5px solid rgba(192, 132, 252, 0.55);
+  background: var(--surface-2);
+}
+
+.input-box {
+  background:
+    linear-gradient(180deg, rgba(139, 92, 246, 0.14) 0%, rgba(236, 72, 153, 0.08) 100%),
+    var(--card-solid);
+  border: 1.5px solid rgba(232, 121, 249, 0.45);
+  border-radius: 17px;
+  padding: 9px;
+  margin: 11px 0;
+  box-shadow: var(--shadow-sm);
+}
+.input-box .row { margin: 0; }
+.input-box .row + .row { margin-top: 9px; }
+#inp {
+  width: 100%;
+  height: 54vh;
+  min-height: 290px;
+  max-height: 440px;
+  resize: none;
+  font-size: 19px;
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  line-height: 1.42;
+  border: 1.5px solid rgba(167, 139, 250, 0.36);
+  background: rgba(7, 10, 24, 0.72);
+  color: #f8fafc;
+}
+#inp::placeholder {
+  color: #cbd5e1;
+  font-family: "Outfit", "Plus Jakarta Sans", sans-serif;
+  font-size: 15.5px;
+  font-weight: 600;
+  opacity: 0.9;
+}
+#errbox {
+  background: var(--err-soft);
+  color: var(--err);
+  border: 1.5px solid rgba(251, 113, 133, 0.65);
+  border-radius: 11px;
+  padding: 8px 10px;
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+#list {
+  height: 36vh;
+  min-height: 210px;
+  overflow-y: auto;
+  border: 1.5px solid rgba(129, 140, 248, 0.42);
+  border-radius: 17px;
+  padding: 6px 12px;
+  margin: 11px 0;
+  background: rgba(8, 12, 28, 0.68);
+  box-shadow: inset 0 3px 10px rgba(0, 0, 0, 0.45);
+}
+.line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+  border-bottom: 1px dashed rgba(148, 163, 184, 0.24);
+  font-size: 19px;
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+.line:last-child { border-bottom: 0; }
+.line .main { flex: 1; word-break: break-word; cursor: pointer; font-weight: 700; }
+.tag {
+  font-family: "Outfit", sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 99px;
+  background: rgba(139, 92, 246, 0.22);
+  color: #ddd6fe;
+  border: 1px solid rgba(196, 181, 253, 0.45);
+  letter-spacing: 0.05em;
+}
+.del-x {
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 17px;
+  padding: 2px 7px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+}
+.del-x:hover {
+  color: #fda4af;
+  background: rgba(244, 63, 94, 0.2);
+  border-color: rgba(251, 113, 133, 0.55);
+}
+
+.breakdown-card {
+  background:
+    radial-gradient(circle at 90% 10%, rgba(236, 72, 153, 0.16), transparent 48%),
+    linear-gradient(160deg, rgba(79, 70, 229, 0.18) 0%, rgba(15, 23, 42, 0.88) 100%);
+  border: 1.5px solid rgba(167, 139, 250, 0.52);
+  border-radius: 17px;
+  padding: 11px 12px;
+  margin: 11px 0;
+  box-shadow: var(--shadow-sm);
+}
+.b-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 7px;
+  margin-bottom: 9px;
+}
+.b-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  padding: 7px 10px;
+  border-radius: 11px;
+  background: rgba(15, 20, 42, 0.85);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+}
+.b-item span:first-child { color: #cbd5e1; font-weight: 600; }
+.b-item span:last-child {
+  font-weight: 800;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 14px;
+  color: #7dd3fc;
+}
+.tot {
+  font-family: "Outfit", sans-serif;
+  font-weight: 900;
+  font-size: 22px;
+  padding: 10px 14px;
+  border-radius: 13px;
+  background: linear-gradient(135deg, #4f46e5 0%, #9333ea 55%, #db2777 100%);
+  color: #ffffff;
+  border: 1.5px solid rgba(255, 255, 255, 0.34);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 6px 20px rgba(147, 51, 234, 0.38);
+}
+
+.h {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 14px;
+  background: var(--surface-2);
+  border: 1.5px solid var(--bd);
+  border-left: 4px solid #c084fc;
+  border-radius: 14px;
+  margin: 8px 0;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+}
+.h:hover { border-color: #e879f9; }
+.h small { color: var(--mut); }
+
+.stat-group {
+  background: var(--surface-2);
+  border: 1.5px solid var(--bd);
+  border-radius: 15px;
+  padding: 11px 12px;
+  margin: 9px 0;
+  box-shadow: var(--shadow-sm);
+}
+.stat-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgba(167, 139, 250, 0.25);
+}
+.stat-head b { font-family: "Outfit", sans-serif; font-size: 15px; }
+.stat-head span {
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 800;
+  font-size: 15px;
+  color: #7dd3fc;
+}
+.stat-vals {
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 14px;
+  line-height: 1.52;
+  word-break: break-word;
+  color: #e2e8f0;
+}
+.grand-box {
+  background: linear-gradient(135deg, #4f46e5 0%, #9333ea 55%, #db2777 100%);
+  color: #ffffff;
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  border-radius: 15px;
+  padding: 13px 15px;
+  margin: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "Outfit", sans-serif;
+  font-weight: 900;
+  font-size: 19px;
+  box-shadow: var(--shadow-sm);
+}
+.hide { display: none !important; }
+
+#slip {
+  background: #f8fafc;
+  color: #090d16;
+  border: 2px dashed #6366f1;
+  border-radius: 16px;
+  padding: 14px;
+  margin: 10px 0;
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 14px;
+  box-shadow: var(--shadow-md);
+}
+#slip h2 { text-align: center; margin: 4px 0 6px; font-size: 18px; font-family: "Outfit", sans-serif; }
+#slip .ts { text-align: right; font-size: 12px; }
+#slip .l { display: flex; justify-content: space-between; gap: 8px; padding: 2px 0; }
+#slip hr { border: 0; border-top: 1px dashed #334155; margin: 6px 0; }
+
+.bt-box {
+  background: var(--surface-2);
+  border: 1.5px solid rgba(34, 211, 238, 0.5);
+  border-radius: 15px;
+  padding: 11px;
+  margin: 9px 0;
+  box-shadow: var(--shadow-sm);
+}
+.bt-status {
+  font-size: 12px;
+  color: var(--mut);
+  margin-top: 6px;
+  line-height: 1.35;
+}
+.note-box {
+  background: var(--warn-bg);
+  border: 1.5px solid var(--warn-bd);
+  border-radius: 14px;
+  padding: 10px 12px;
+  font-size: 13px;
+  margin: 8px 0;
+}
+@media print {
+  body { background: #fff !important; padding: 0 !important; }
+  body > *:not(#slipwrap) { display: none !important; }
+  #slipwrap .no { display: none !important; }
+  #slip { border: 0; border-radius: 0; box-shadow: none; margin: 0; padding: 2px; width: 58mm; }
+  @page { margin: 2mm; }
+}
+</style>
+</head>
+<body>
+
+<!-- HAMBURGER DRAWER -->
+<div id="drawerBackdrop" class="drawer-backdrop hide"></div>
+<aside id="navDrawer" class="drawer hide" aria-label="Menu">
+  <div class="drawer-top">
+    <div class="brand-wordmark" style="font-size:19px">
+      <span class="brand-jio">JIO</span>
+      <span class="brand-play">PLAY</span>
+    </div>
+    <button id="closeMenu" class="drawer-close" aria-label="Close Menu">&#10005;</button>
+  </div>
+  <button id="t1" class="nav-item on"><span>New Slip</span></button>
+  <button id="t2" class="nav-item"><span>History</span><span class="nav-pill" id="hc">0</span></button>
+  <button id="t3" class="nav-item"><span>Data</span></button>
+  <button id="t4" class="nav-item"><span>Sync / Backup</span></button>
+</aside>
+
+<div id="app" class="site-shell">
+  <header>
+    <button id="openMenu" class="menu-btn" aria-label="Open Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="brand-stage" id="logoHome">
+      <div class="brand-wordmark">
+        <span class="brand-jio">JIO</span>
+        <span class="brand-play">PLAY</span>
+      </div>
+      <svg class="brand-ribbon" viewBox="0 0 112 6" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="jpRibbonGrad" x1="0" y1="0" x2="112" y2="0" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#38bdf8"/>
+            <stop offset="45%" stop-color="#a855f7"/>
+            <stop offset="100%" stop-color="#f472b6"/>
+          </linearGradient>
+        </defs>
+        <path d="M2 3.5C32 1 80 1 110 3.5" stroke="url(#jpRibbonGrad)" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="56" cy="2.3" r="2.2" fill="#fbbf24"/>
+      </svg>
+    </div>
+    <button id="quickNewBtn" class="home-dot-btn" title="New Slip" aria-label="New Slip">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polygon points="5 3 19 12 5 21 5 3" fill="rgba(255,255,255,0.22)"/>
+      </svg>
+    </button>
+  </header>
+
+  <!-- TAB 1: NEW SLIP -->
+  <div id="desk">
+    <div class="head-box">
+      <div class="row">
+        <select id="head"></select>
+        <button id="edit" class="btn-rename" style="flex:0 0 auto">
+          <svg width="12.5" height="12.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+          <span>Rename</span>
+        </button>
+        <button id="addHead" class="btn-new-head" style="flex:0 0 auto">
+          <svg width="12.5" height="12.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          <span>New</span>
+        </button>
+      </div>
+      <div class="row hide" id="erow">
+        <input id="ename" placeholder="Enter heading name">
+        <button id="esave" class="btn-primary" style="flex:0 0 auto">Save Header</button>
+      </div>
+    </div>
+
+    <div class="input-box">
+      <div class="row">
+        <textarea id="inp" placeholder="PLAY here!!"></textarea>
+      </div>
+      <div id="errbox" class="hide"></div>
+      <div class="row">
+        <button id="add" class="btn-add-entry">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+          <span>Add Entry</span>
+        </button>
+      </div>
+    </div>
+
+    <div id="list"></div>
+
+    <div class="breakdown-card">
+      <div class="b-grid" id="liveBreakdown"></div>
+      <div class="tot">
+        <span>Grand Total</span>
+        <span id="total">0</span>
+      </div>
+    </div>
+
+    <div class="row">
+      <button id="gen" class="btn-gen">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        <span>Generate &amp; Save Slip</span>
+      </button>
+      <button id="clr" class="btn-clear" style="flex:0 0 auto;padding:14px 15px">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/></svg>
+        <span>Clear</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- TAB 2: HISTORY -->
+  <div id="hist" class="hide">
+    <div class="row">
+      <input id="hsearch" placeholder="Search heading or entry...">
+      <select id="hfilter" style="flex:0 0 42%"></select>
+    </div>
+    <div id="hlist"></div>
+  </div>
+
+  <!-- TAB 3: DATA SUMMARY (5 PARTS) -->
+  <div id="data" class="hide">
+    <div class="row">
+      <select id="dsel"></select>
+      <button id="dcopy" class="btn-copy" style="flex:0 0 auto">Copy Report</button>
+    </div>
+    <div id="dout"></div>
+    <textarea id="dtxt" readonly rows="8" style="width:100%;font-family:'JetBrains Mono',monospace;font-size:13px;margin-top:8px"></textarea>
+    <div class="row">
+      <button id="dreset" class="danger">Delete Heading Data</button>
+    </div>
+  </div>
+
+  <!-- TAB 4: DOMAIN SYNC & BACKUP -->
+  <div id="sync" class="hide">
+    <div class="note-box">
+      <b>Self-Hosted Domain Ready:</b> Works offline in browser storage automatically, or connect a custom REST API endpoint below to sync slips across devices on your own domain.
+    </div>
+
+    <div class="stat-group">
+      <div class="stat-head"><b>Backup &amp; Transfer (JSON / CSV)</b></div>
+      <div class="row">
+        <button id="expJson" class="btn-primary">Export Backup (.json)</button>
+        <button id="expCsv" class="btn-add-entry" style="font-size:13px;padding:11px 12px">Export Excel (.csv)</button>
+      </div>
+      <div class="row">
+        <input type="file" id="impFile" accept=".json" style="padding:7px">
+        <button id="impBtn" class="btn-rename" style="flex:0 0 auto">Restore</button>
+      </div>
+    </div>
+
+    <div class="stat-group">
+      <div class="stat-head"><b>Optional Cloud Webhook / API Sync</b></div>
+      <div class="row">
+        <input id="apiUrl" placeholder="https://your-domain.com/api/slips">
+      </div>
+      <div class="row">
+        <input id="apiKey" type="password" placeholder="Optional Bearer Token / Secret Key">
+      </div>
+      <div class="row">
+        <button id="saveApi" class="btn-primary">Save Endpoint</button>
+        <button id="syncNow" class="btn-bt">Sync Now</button>
+      </div>
+      <div id="syncMsg" style="font-size:13px;color:var(--mut);margin-top:4px"></div>
+    </div>
+  </div>
+</div>
+
+<!-- PRINTABLE / SHAREABLE SLIP VIEW -->
+<div id="slipwrap" class="site-shell hide">
+  <div id="slip"></div>
+
+  <div class="bt-box no">
+    <div style="font-family:'Outfit',sans-serif;font-size:12px;font-weight:800;letter-spacing:0.06em;color:#67e8f9;margin-bottom:5px">
+      CONTINUOUS DIRECT BLUETOOTH PRINT (SEZNIK 58mm)
+    </div>
+    <div class="row" style="margin:4px 0">
+      <button id="btPrint" class="btn-bt">Bluetooth Print (GS v 0)</button>
+    </div>
+    <div class="bt-status" id="btStatus">Ready. Streams complete slip continuously without mid-slip pauses.</div>
+  </div>
+
+  <div class="row no">
+    <button id="copy" class="btn-copy">Copy Slip</button>
+    <button id="shareBtn" class="btn-share">Share</button>
+    <button id="print" class="btn-print">Browser Print</button>
+  </div>
+  <div class="row no">
+    <button id="sdel" class="danger">Delete Slip</button>
+    <button id="back" class="btn-clear">Close / New Slip</button>
+  </div>
+</div>
+
+<script>
+(function() {
+  "use strict";
+
+  var WARN = "चिट्टी तपासून घेणे नंतर तक्रार चालणार नाही.";
+  var DEFAULT_HEADS = [
+    "SRIDEVI",
+    "PADMAVATI",
+    "TIME BAZAR",
+    "SOLAPUR DAY",
+    "MILAN DAY",
+    "RAJDHANI DAY",
+    "KALYAN",
+    "SRIDEVI NIGHT",
+    "PADMAVTI NIGHT",
+    "SOLAPUR NIGHT",
+    "MILAN NIGHT",
+    "KALYAN NIGHT",
+    "RAJDHANI NIGHT",
+    "MAIN BAZAR"
+  ];
+  var CATS = ["Single digits", "Jodi", "PAANA", "JK", "SANGAM"];
+  var SHORT_CATS = ["1-Digit", "Jodi", "PAANA", "JK", "SANGAM"];
+  var SIGNS = /[*#₹&@\-€¢£$=]/;
+
+  var $ = function(id) { return document.getElementById(id); };
+
+  function ld(k, d) {
+    try {
+      var v = localStorage.getItem(k);
+      return v ? JSON.parse(v) : d;
+    } catch (e) { return d; }
+  }
+  function sv(k, v) {
+    try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {}
+  }
+  function esc(s) {
+    return String(s).replace(/[&<>"]/g, function(c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
+    });
+  }
+  function round2(n) {
+    return Math.round((Number(n) || 0) * 100) / 100;
+  }
+  function stamp(t) {
+    var d = new Date(t);
+    return d.toLocaleDateString() + " " + d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+  }
+
+  function copyTextReliable(text, btn, defaultLabel) {
+    var done = function(ok) {
+      if (!btn) return;
+      btn.textContent = ok ? "Copied ✓" : "Copy Failed";
+      setTimeout(function() { btn.textContent = defaultLabel; }, 1600);
+    };
+
+    function legacyCopy() {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "fixed";
+      ta.style.top = "0";
+      ta.style.left = "-9999px";
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      ta.setSelectionRange(0, ta.value.length);
+      var ok = false;
+      try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+      document.body.removeChild(ta);
+      return ok;
+    }
+
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(function() {
+        done(true);
+      }).catch(function() {
+        done(legacyCopy());
+      });
+    } else {
+      done(legacyCopy());
+    }
+  }
+
+  function evalMath(expr) {
+    var s = String(expr).replace(/,/g, "").replace(/\s+/g, "");
+    if (!s || !/^[0-9+\-*/().]+$/.test(s)) return NaN;
+    var tokens = s.match(/(\d+\.?\d*|\.\d+|[+\-*/()])/g);
+    if (!tokens || tokens.join("") !== s) return NaN;
+    var pos = 0;
+
+    function parseExpr() {
+      var val = parseTerm();
+      while (pos < tokens.length && (tokens[pos] === "+" || tokens[pos] === "-")) {
+        var op = tokens[pos++];
+        var right = parseTerm();
+        val = op === "+" ? val + right : val - right;
+      }
+      return val;
+    }
+    function parseTerm() {
+      var val = parseFactor();
+      while (pos < tokens.length && (tokens[pos] === "*" || tokens[pos] === "/")) {
+        var op = tokens[pos++];
+        var right = parseFactor();
+        if (op === "/" && right === 0) return NaN;
+        val = op === "*" ? val * right : val / right;
+      }
+      return val;
+    }
+    function parseFactor() {
+      if (tokens[pos] === "+") { pos++; return parseFactor(); }
+      if (tokens[pos] === "-") { pos++; return -parseFactor(); }
+      if (tokens[pos] === "(") {
+        pos++;
+        var val = parseExpr();
+        if (tokens[pos] !== ")") return NaN;
+        pos++;
+        return val;
+      }
+      var num = parseFloat(tokens[pos++]);
+      return isFinite(num) ? num : NaN;
+    }
+
+    var res = parseExpr();
+    if (pos !== tokens.length || !isFinite(res)) return NaN;
+    return round2(res);
+  }
+
+  function classifyNumber(rawNum) {
+    var clean = String(rawNum).trim();
+    if (!clean) return { ok: false, error: "Empty number" };
+
+    var pair = clean.match(/^(\d+)\s*[xX×]\s*(\d+)$/);
+    if (pair) {
+      var a = pair[1], b = pair[2];
+      var la = a.length, lb = b.length;
+      if ((la === 1 && lb === 3) || (la === 3 && lb === 1)) {
+        return { ok: true, norm: a + "x" + b, catIndex: 3, catName: CATS[3] };
+      }
+      if (la === 3 && lb === 3) {
+        return { ok: true, norm: a + "x" + b, catIndex: 4, catName: CATS[4] };
+      }
+      return {
+        ok: false,
+        error: '"' + clean + '" invalid pair (only 1x3, 3x1 for JK or 3x3 for SANGAM allowed)'
+      };
+    }
+
+    if (/^\d+$/.test(clean)) {
+      if (clean.length === 1) return { ok: true, norm: clean, catIndex: 0, catName: CATS[0] };
+      if (clean.length === 2) return { ok: true, norm: clean, catIndex: 1, catName: CATS[1] };
+      if (clean.length === 3) return { ok: true, norm: clean, catIndex: 2, catName: CATS[2] };
+      return {
+        ok: false,
+        error: '"' + clean + '" exceeds 3 digits (only 1, 2, or 3 digits allowed)'
+      };
+    }
+
+    return {
+      ok: false,
+      error: '"' + clean + '" is not a valid numerical entry'
+    };
+  }
+
+  // State
+  var heads = ld("jio_play_heads_v20", null);
+  if (!Array.isArray(heads) || !heads.length) {
+    heads = DEFAULT_HEADS.slice();
+    sv("jio_play_heads_v20", heads);
+  }
+  var hist = ld("jio_play_hist_v20", null);
+  if (!Array.isArray(hist)) {
+    var oldHist = ld("hist", []);
+    hist = Array.isArray(oldHist) ? oldHist : [];
+    sv("jio_play_hist_v20", hist);
+  }
+  var hi = ld("jio_play_hi_v20", 0);
+  if (typeof hi !== "number" || hi < 0 || hi >= heads.length) hi = 0;
+  var rows = ld("jio_play_draft_v20", []);
+  if (!Array.isArray(rows)) rows = [];
+  var curSlip = null;
+  var armTimers = {};
+  var editMode = "rename";
+
+  function openDrawer() {
+    $("drawerBackdrop").classList.remove("hide");
+    $("navDrawer").classList.remove("hide");
+  }
+  function closeDrawer() {
+    $("drawerBackdrop").classList.add("hide");
+    $("navDrawer").classList.add("hide");
+  }
+
+  function saveDraft() {
+    sv("jio_play_draft_v20", rows);
+  }
+
+  function resetArm(btn, label) {
+    if (!btn) return;
+    btn.dataset.arm = "";
+    btn.textContent = label;
+    if (armTimers[btn.id]) {
+      clearTimeout(armTimers[btn.id]);
+      delete armTimers[btn.id];
+    }
+  }
+
+  function confirmTap(btn, idleLabel, confirmLabel, action) {
+    if (btn.dataset.arm === "1") {
+      resetArm(btn, idleLabel);
+      action();
+      return;
+    }
+    btn.dataset.arm = "1";
+    btn.textContent = confirmLabel;
+    if (armTimers[btn.id]) clearTimeout(armTimers[btn.id]);
+    armTimers[btn.id] = setTimeout(function() {
+      resetArm(btn, idleLabel);
+    }, 2500);
+  }
+
+  function fillHeads() {
+    $("head").innerHTML = heads.map(function(h, i) {
+      return '<option value="' + i + '">' + esc(h) + "</option>";
+    }).join("");
+    $("head").value = String(hi);
+  }
+
+  function computeFiveTotals(entryRows) {
+    var sums = [0, 0, 0, 0, 0];
+    entryRows.forEach(function(r) {
+      if (r.a === null || r.a === undefined) return;
+      var ci = typeof r.cat === "number" ? r.cat : classifyNumber(r.n).catIndex;
+      if (ci >= 0 && ci < 5) sums[ci] = round2(sums[ci] + Number(r.a));
+    });
+    return sums;
+  }
+
+  function renderDesk() {
+    saveDraft();
+    $("list").innerHTML = rows.length ? rows.map(function(r, i) {
+      var pending = r.a === null;
+      return (
+        '<div class="line">' +
+          '<span class="main" data-e="' + i + '"' + (pending ? ' style="color:#7dd3fc"' : "") + ">" +
+            esc(r.n) + "=" + (pending ? "?" : r.a) +
+          "</span>" +
+          '<span class="tag">' + SHORT_CATS[r.cat] + "</span>" +
+          '<a href="#" class="del-x" data-d="' + i + '" aria-label="Remove">&#10005;</a>' +
+        "</div>"
+      );
+    }).join("") : '<div style="color:var(--mut);font-size:14px;padding:12px 0">Validated entries appear here. Tap any row to edit.</div>';
+
+    $("list").scrollTop = $("list").scrollHeight;
+
+    var sums = computeFiveTotals(rows);
+    $("liveBreakdown").innerHTML = CATS.map(function(label, idx) {
+      return '<div class="b-item"><span>' + label + "</span><span>" + sums[idx] + "</span></div>";
+    }).join("");
+
+    var grand = round2(sums.reduce(function(acc, v) { return acc + v; }, 0));
+    var pendingCount = rows.filter(function(r) { return r.a === null; }).length;
+    $("total").textContent = grand + (pendingCount ? " (" + pendingCount + " ?)" : "");
+    $("hc").textContent = String(hist.length);
+  }
+
+  function parseAndAdd() {
+    var raw = $("inp").value;
+    var lines = raw.split(/\r?\n|;|,+/);
+    var errors = [];
+    var leftovers = [];
+    var parsedItems = [];
+
+    lines.forEach(function(line) {
+      var l = line.trim();
+      if (!l) return;
+
+      var numPart = "";
+      var valPart = null;
+      var hasSign = false;
+
+      var pr = l.match(/^(\d+\s*[xX×]\s*\d+)\s*(.*)$/);
+      if (pr) {
+        numPart = pr[1];
+        var rest = pr[2].trim();
+        if (rest) {
+          if (!SIGNS.test(rest.charAt(0))) {
+            errors.push('"' + l + '" needs a value sign (= * # ₹ & @ - € ¢ £ $)');
+            leftovers.push(l);
+            return;
+          }
+          hasSign = true;
+          valPart = rest.slice(1).trim();
+        }
+      } else {
+        var m = l.match(SIGNS);
+        if (m) {
+          hasSign = true;
+          numPart = l.slice(0, m.index).trim();
+          valPart = l.slice(m.index + 1).trim();
+        } else {
+          numPart = l;
+        }
+      }
+
+      var cls = classifyNumber(numPart);
+      if (!cls.ok) {
+        errors.push(cls.error);
+        leftovers.push(l);
+        return;
+      }
+
+      var amount = null;
+      if (valPart !== null && valPart !== "") {
+        amount = evalMath(valPart);
+        if (isNaN(amount) || amount < 0) {
+          errors.push('"' + l + '" has an invalid amount');
+          leftovers.push(l);
+          return;
+        }
+      }
+
+      parsedItems.push({ rawLine: l, cls: cls, amount: amount, hasSign: hasSign });
+    });
+
+    var pendingBatch = [];
+    parsedItems.forEach(function(item) {
+      if (item.amount === null && !item.hasSign) {
+        pendingBatch.push(item);
+      } else if (item.amount !== null) {
+        for (var k = 0; k < pendingBatch.length; k++) {
+          pendingBatch[k].amount = item.amount;
+        }
+        pendingBatch = [];
+      } else {
+        pendingBatch = [];
+      }
+    });
+
+    parsedItems.forEach(function(item) {
+      var cls = item.cls;
+      var amount = item.amount;
+
+      if (amount !== null) {
+        var existingPending = [];
+        for (var i = 0; i < rows.length; i++) {
+          if (rows[i].a === null) existingPending.push(i);
+        }
+
+        var matchedSameNum = false;
+        for (var j = 0; j < rows.length; j++) {
+          if (rows[j].a === null && rows[j].n === cls.norm) {
+            rows[j].a = amount;
+            matchedSameNum = true;
+          }
+        }
+        if (matchedSameNum) return;
+
+        if (existingPending.length > 0 && parsedItems.length === 1) {
+          for (var p = 0; p < existingPending.length; p++) {
+            rows[existingPending[p]].a = amount;
+          }
+        }
+      }
+
+      rows.push({ n: cls.norm, a: amount, cat: cls.catIndex });
+    });
+
+    if (errors.length) {
+      $("errbox").textContent = errors.join(" • ");
+      $("errbox").classList.remove("hide");
+    } else {
+      $("errbox").classList.add("hide");
+      $("errbox").textContent = "";
+    }
+
+    $("inp").value = leftovers.join("\n");
+    renderDesk();
+    $("inp").focus();
+  }
+
+  function renderHistory() {
+    var q = ($("hsearch").value || "").trim().toLowerCase();
+    var hf = $("hfilter").value || "*";
+
+    var usedHeads = [];
+    hist.forEach(function(s) {
+      if (usedHeads.indexOf(s.head) < 0) usedHeads.push(s.head);
+    });
+    $("hfilter").innerHTML = '<option value="*">All Headings</option>' +
+      usedHeads.map(function(h) { return "<option>" + esc(h) + "</option>"; }).join("");
+    if (hf === "*" || usedHeads.indexOf(hf) >= 0) $("hfilter").value = hf;
+
+    var filtered = hist.map(function(s, idx) { return { s: s, idx: idx }; }).filter(function(item) {
+      var s = item.s;
+      if (hf !== "*" && s.head !== hf) return false;
+      if (!q) return true;
+      if (s.head.toLowerCase().indexOf(q) >= 0) return true;
+      return s.rows.some(function(r) { return String(r.n).toLowerCase().indexOf(q) >= 0; });
+    });
+
+    $("hlist").innerHTML = filtered.length ? filtered.map(function(item) {
+      var s = item.s;
+      return (
+        '<div class="h" data-v="' + item.idx + '">' +
+          "<div><b>" + esc(s.head) + "</b><br><small>" + stamp(s.t) + " · " + s.rows.length + " entries</small></div>" +
+          "<b>" + s.total + "</b>" +
+        "</div>"
+      );
+    }).join("") : '<p style="color:var(--mut);text-align:center;padding:20px 0">No saved slips yet.</p>';
+  }
+
+  function renderDataTab() {
+    var names = [];
+    hist.forEach(function(s) {
+      if (names.indexOf(s.head) < 0) names.push(s.head);
+    });
+    var sel = $("dsel");
+    var prev = sel.value;
+    sel.innerHTML = (names.length > 1 ? '<option value="*">ALL HEADINGS (COMBINED)</option>' : "") +
+      names.map(function(n) { return "<option>" + esc(n) + "</option>"; }).join("");
+    if (prev && (prev === "*" || names.indexOf(prev) >= 0)) sel.value = prev;
+    drawDataReport();
+  }
+
+  function drawDataReport() {
+    var target = $("dsel").value;
+    var out = $("dout");
+    if (!target) {
+      out.innerHTML = '<p style="color:var(--mut);text-align:center;padding:20px 0">No data yet. Generate a slip first.</p>';
+      $("dtxt").value = "";
+      return;
+    }
+
+    var groups = [new Map(), new Map(), new Map(), new Map(), new Map()];
+    var groupTotals = [0, 0, 0, 0, 0];
+    var slipCount = 0;
+
+    hist.slice().reverse().forEach(function(s) {
+      if (target !== "*" && s.head !== target) return;
+      slipCount++;
+      s.rows.forEach(function(r) {
+        var cls = classifyNumber(r.n);
+        if (!cls.ok) return;
+        var gi = cls.catIndex;
+        var key = cls.norm;
+        var val = Number(r.a) || 0;
+        groups[gi].set(key, round2((groups[gi].get(key) || 0) + val));
+        groupTotals[gi] = round2(groupTotals[gi] + val);
+      });
+    });
+
+    var label = target === "*" ? "ALL HEADINGS" : target;
+    var html = "";
+    var plain = label + " (" + slipCount + " slips)\n";
+
+    groups.forEach(function(map, idx) {
+      if (!map.size) return;
+      var entries = Array.from(map.entries());
+      entries.sort(function(a, b) {
+        return a[0].localeCompare(b[0], undefined, { numeric: true });
+      });
+      var pairs = entries.map(function(kv) { return kv[0] + "=" + kv[1]; });
+      html +=
+        '<div class="stat-group">' +
+          '<div class="stat-head"><b>' + CATS[idx] + "</b><span>Total: " + groupTotals[idx] + "</span></div>" +
+          '<div class="stat-vals">' + esc(pairs.join(", ")) + "</div>" +
+        "</div>";
+      plain += "\n" + CATS[idx] + " [Total: " + groupTotals[idx] + "]\n" + pairs.join(", ") + "\n";
+    });
+
+    var grand = round2(groupTotals.reduce(function(a, b) { return a + b; }, 0));
+    if (html) {
+      html += '<div class="grand-box"><span>5-Part Grand Total</span><span>' + grand + "</span></div>";
+      plain += "\n==============================\nGRAND TOTAL: " + grand;
+    }
+
+    out.innerHTML = html || '<p style="color:var(--mut)">No entries for this selection.</p>';
+    $("dtxt").value = html ? plain : "";
+  }
+
+  function showSlip(s) {
+    curSlip = s;
+    var sums = s.partTotals || computeFiveTotals(s.rows);
+    var partLines = CATS.map(function(name, idx) {
+      return sums[idx] ? '<div class="l"><span>' + name + "</span><span>" + sums[idx] + "</span></div>" : "";
+    }).join("");
+
+    $("slip").innerHTML =
+      '<div class="ts">' + stamp(s.t) + "</div>" +
+      "<h2>" + esc(s.head) + "</h2><hr>" +
+      s.rows.map(function(r) {
+        return '<div class="l"><span>' + esc(r.n) + "</span><span>" + r.a + "</span></div>";
+      }).join("") +
+      "<hr>" + partLines +
+      '<div class="l"><b>TOTAL</b><b>' + s.total + "</b></div><hr>" +
+      "<div><b>Warning</b><br>" + WARN + "</div>";
+
+    closeDrawer();
+    $("app").classList.add("hide");
+    $("slipwrap").classList.remove("hide");
+  }
+
+  function formatSlipText(s) {
+    var sums = s.partTotals || computeFiveTotals(s.rows);
+    var parts = CATS.map(function(name, idx) {
+      return sums[idx] ? name + ": " + sums[idx] : "";
+    }).filter(Boolean).join("\n");
+
+    return (
+      stamp(s.t) + "\n" +
+      s.head + "\n" +
+      "--------------------\n" +
+      s.rows.map(function(r) { return r.n + " = " + r.a; }).join("\n") + "\n" +
+      "--------------------\n" +
+      (parts ? parts + "\n--------------------\n" : "") +
+      "TOTAL: " + s.total + "\n\n" +
+      "Warning:\n" + WARN
+    );
+  }
+
+  // GS v 0 RASTER BLUETOOTH PRINT ENGINE (SEZNIK 58mm)
+  var btDevice = null;
+  var btChar = null;
+  var isPrinting = false;
+
+  function renderSlipBitmap384(s, lumThreshold) {
+    var W = 384;
+    var pad = 16;
+    var sums = s.partTotals || computeFiveTotals(s.rows);
+    var activeParts = [];
+    CATS.forEach(function(name, idx) {
+      if (sums[idx]) activeParts.push({ name: name, val: sums[idx] });
+    });
+
+    var lineH = 26;
+    var estH =
+      36 + 40 + 20 +
+      (s.rows.length * lineH) +
+      20 +
+      (activeParts.length * 24) +
+      (activeParts.length ? 16 : 0) +
+      36 + 20 + 24 + 240 + 240;
+
+    var canvas = document.createElement("canvas");
+    canvas.width = W;
+    canvas.height = estH;
+    var ctx = canvas.getContext("2d");
+
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, W, estH);
+    ctx.fillStyle = "#000000";
+    ctx.textBaseline = "top";
+
+    var y = 8;
+
+    ctx.font = "16px monospace";
+    ctx.textAlign = "right";
+    ctx.fillText(stamp(s.t), W - pad, y);
+    y += 24;
+
+    ctx.font = "bold 22px sans-serif";
+    ctx.textAlign = "left";
+    ctx.fillText(String(s.head), pad, y, W - pad * 2);
+    y += 32;
+
+    function drawDash() {
+      ctx.save();
+      ctx.setLineDash([4, 4]);
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(pad, y + 6);
+      ctx.lineTo(W - pad, y + 6);
+      ctx.stroke();
+      ctx.restore();
+      y += 16;
+    }
+
+    drawDash();
+
+    ctx.font = "20px monospace";
+    s.rows.forEach(function(r) {
+      ctx.textAlign = "left";
+      ctx.fillText(r.n + " = " + r.a, pad, y);
+      y += lineH;
+    });
+
+    drawDash();
+
+    if (activeParts.length) {
+      ctx.font = "18px sans-serif";
+      activeParts.forEach(function(p) {
+        ctx.textAlign = "left";
+        ctx.fillText(p.name + ": " + p.val, pad, y);
+        y += 24;
+      });
+      drawDash();
+    }
+
+    ctx.font = "bold 22px monospace";
+    ctx.textAlign = "left";
+    ctx.fillText("TOTAL: " + s.total, pad, y);
+    y += 32;
+
+    drawDash();
+
+    ctx.font = "bold 17px sans-serif";
+    ctx.textAlign = "left";
+    ctx.fillText("Warning:", pad, y);
+    y += 22;
+
+    ctx.font = "17px sans-serif";
+    var words = WARN.split(" ");
+    var line = "";
+    for (var i = 0; i < words.length; i++) {
+      var test = line ? line + " " + words[i] : words[i];
+      if (ctx.measureText(test).width > W - pad * 2 && line) {
+        ctx.fillText(line, pad, y);
+        y += 22;
+        line = words[i];
+      } else {
+        line = test;
+      }
+    }
+    if (line) {
+      ctx.fillText(line, pad, y);
+      y += 26;
+    }
+
+    var finalH = Math.min(estH, y + 180);
+    var imgData = ctx.getImageData(0, 0, W, finalH).data;
+    var bytesPerRow = W / 8;
+    var bitmap = new Uint8Array(bytesPerRow * finalH);
+
+    for (var row = 0; row < finalH; row++) {
+      for (var col = 0; col < W; col++) {
+        var idx = (row * W + col) * 4;
+        var lum = 0.299 * imgData[idx] + 0.587 * imgData[idx + 1] + 0.114 * imgData[idx + 2];
+        if (lum < lumThreshold) {
+          bitmap[row * bytesPerRow + (col >> 3)] |= (0x80 >> (col & 7));
+        }
+      }
+    }
+
+    return { bitmap: bitmap, widthBytes: bytesPerRow, height: finalH };
+  }
+
+  function handleBtDisconnected() {
+    btChar = null;
+    if (isPrinting) {
+      $("btStatus").textContent = "SEZNIK disconnected/shut off during print. Tap Bluetooth Print to reconnect.";
+    }
+  }
+
+  async function streamLowDraw(char, buffer) {
+    var useNoResp = !!(char.properties && char.properties.writeWithoutResponse);
+    var chunkSize = 64;
+    for (var i = 0; i < buffer.length; i += chunkSize) {
+      if (btDevice && btDevice.gatt && !btDevice.gatt.connected) {
+        throw new Error("Printer powered off during print.");
+      }
+      var slice = buffer.slice(i, i + chunkSize);
+      if (useNoResp) {
+        await char.writeValueWithoutResponse(slice);
+        await new Promise(function(r) { setTimeout(r, 12); });
+      } else {
+        await char.writeValue(slice);
+        await new Promise(function(r) { setTimeout(r, 6); });
+      }
+    }
+  }
+
+  async function directBluetoothPrint() {
+    if (isPrinting) return;
+    var st = $("btStatus");
+    if (!curSlip) return;
+
+    if (!navigator.bluetooth) {
+      st.textContent = "Web Bluetooth requires Google Chrome over HTTPS or localhost.";
+      return;
+    }
+
+    isPrinting = true;
+    $("btPrint").disabled = true;
+
+    try {
+      if (!btDevice || !btDevice.gatt || !btDevice.gatt.connected || !btChar) {
+        st.textContent = "Select SEZNIK printer...";
+        btDevice = await navigator.bluetooth.requestDevice({
+          acceptAllDevices: true,
+          optionalServices: [
+            0xff00,
+            "0000ff00-0000-1000-8000-00805f9b34fb",
+            "000018f0-0000-1000-8000-00805f9b34fb",
+            "49535343-fe7d-4ae5-8fa9-9fafd205e455",
+            "e7810a71-73ae-499d-8c15-faa9aef0c3f2"
+          ]
+        });
+
+        btDevice.removeEventListener("gattserverdisconnected", handleBtDisconnected);
+        btDevice.addEventListener("gattserverdisconnected", handleBtDisconnected);
+
+        st.textContent = "Connecting to " + (btDevice.name || "SEZNIK") + "...";
+        var server = await btDevice.gatt.connect();
+        await new Promise(function(r) { setTimeout(r, 350); });
+        var services = await server.getPrimaryServices();
+
+        var foundChar = null;
+        for (var s = 0; s < services.length; s++) {
+          var chars = await services[s].getCharacteristics();
+          for (var c = 0; c < chars.length; c++) {
+            var ch = chars[c];
+            var u = ch.uuid.toLowerCase();
+            if (u.indexOf("ff02") >= 0 && (ch.properties.write || ch.properties.writeWithoutResponse)) {
+              foundChar = ch;
+              break;
+            }
+          }
+          if (foundChar) break;
+        }
+        if (!foundChar) {
+          for (var s2 = 0; s2 < services.length; s2++) {
+            var chars2 = await services[s2].getCharacteristics();
+            for (var c2 = 0; c2 < chars2.length; c2++) {
+              var ch2 = chars2[c2];
+              if (ch2.properties.write || ch2.properties.writeWithoutResponse) {
+                foundChar = ch2;
+                break;
+              }
+            }
+            if (foundChar) break;
+          }
+        }
+        if (!foundChar) throw new Error("No writable channel found on printer.");
+        btChar = foundChar;
+      }
+
+      var lumThreshold = 100;
+      st.textContent = "Printing via GS v 0 on " + (btDevice.name || "SEZNIK") + "...";
+      var r = renderSlipBitmap384(curSlip, lumThreshold);
+
+      await streamLowDraw(btChar, new Uint8Array([0x1b, 0x40]));
+      await new Promise(function(r) { setTimeout(r, 80); });
+
+      var xL = r.widthBytes & 0xff;
+      var xH = (r.widthBytes >> 8) & 0xff;
+      var yL = r.height & 0xff;
+      var yH = (r.height >> 8) & 0xff;
+      var header = new Uint8Array([0x1d, 0x76, 0x30, 0x00, xL, xH, yL, yH]);
+      var footer = new Uint8Array([0x0a, 0x0a, 0x0a, 0x0a, 0x0a, 0x0a, 0x0a, 0x0a, 0x0a, 0x0a, 0x0a, 0x0a, 0x0a, 0x0a, 0x0a, 0x0a, 0x0a, 0x0a, 0x0a, 0x0a, 0x0a, 0x0a]);
+      var payload = new Uint8Array(header.length + r.bitmap.length + footer.length);
+      payload.set(header, 0);
+      payload.set(r.bitmap, header.length);
+      payload.set(footer, header.length + r.bitmap.length);
+
+      await streamLowDraw(btChar, payload);
+      st.textContent = "Print complete on " + (btDevice.name || "SEZNIK") + " ✓";
+    } catch (err) {
+      btChar = null;
+      st.textContent = "Print stopped: " + (err && err.message ? err.message : err);
+    } finally {
+      isPrinting = false;
+      $("btPrint").disabled = false;
+    }
+  }
+
+  function switchTab(n) {
+    closeDrawer();
+    $("slipwrap").classList.add("hide");
+    $("app").classList.remove("hide");
+    resetArm($("clr"), "Clear");
+    resetArm($("dreset"), "Delete Heading Data");
+    $("desk").classList.toggle("hide", n !== 1);
+    $("hist").classList.toggle("hide", n !== 2);
+    $("data").classList.toggle("hide", n !== 3);
+    $("sync").classList.toggle("hide", n !== 4);
+    $("t1").className = n === 1 ? "nav-item on" : "nav-item";
+    $("t2").className = n === 2 ? "nav-item on" : "nav-item";
+    $("t3").className = n === 3 ? "nav-item on" : "nav-item";
+    $("t4").className = n === 4 ? "nav-item on" : "nav-item";
+    if (n === 2) renderHistory();
+    if (n === 3) renderDataTab();
+  }
+
+  // Optional Domain API Sync
+  async function pushToDomainApi() {
+    var url = ($("apiUrl").value || "").trim();
+    if (!url) return;
+    var key = ($("apiKey").value || "").trim();
+    try {
+      var headers = { "Content-Type": "application/json" };
+      if (key) headers["Authorization"] = "Bearer " + key;
+      var res = await fetch(url, {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify({ heads: heads, slips: hist, updatedAt: Date.now() })
+      });
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      $("syncMsg").textContent = "Last synced at " + new Date().toLocaleTimeString();
+    } catch (e) {
+      $("syncMsg").textContent = "Sync error: " + e.message;
+    }
+  }
+
+  // Drawer & Navigation bindings
+  $("openMenu").onclick = openDrawer;
+  $("closeMenu").onclick = closeDrawer;
+  $("drawerBackdrop").onclick = closeDrawer;
+  $("logoHome").onclick = function() { switchTab(1); };
+  $("quickNewBtn").onclick = function() { switchTab(1); };
+
+  $("t1").onclick = function() { switchTab(1); };
+  $("t2").onclick = function() { switchTab(2); };
+  $("t3").onclick = function() { switchTab(3); };
+  $("t4").onclick = function() { switchTab(4); };
+
+  $("head").onchange = function() {
+    hi = +$("head").value;
+    sv("jio_play_hi_v20", hi);
+  };
+  $("edit").onclick = function() {
+    editMode = "rename";
+    var r = $("erow");
+    r.classList.remove("hide");
+    $("ename").placeholder = "Rename active heading";
+    $("ename").value = heads[hi];
+    $("ename").focus();
+    $("ename").select();
+  };
+  $("addHead").onclick = function() {
+    editMode = "new";
+    var r = $("erow");
+    r.classList.remove("hide");
+    $("ename").placeholder = "New heading name";
+    $("ename").value = "";
+    $("ename").focus();
+  };
+  function saveHeadingName() {
+    var v = $("ename").value.trim();
+    if (v) {
+      if (editMode === "new") {
+        var existingIdx = heads.indexOf(v);
+        if (existingIdx >= 0) {
+          hi = existingIdx;
+        } else {
+          heads.push(v);
+          hi = heads.length - 1;
+        }
+      } else {
+        heads[hi] = v;
+      }
+      sv("jio_play_heads_v20", heads);
+      sv("jio_play_hi_v20", hi);
+      fillHeads();
+      pushToDomainApi();
+    }
+    $("erow").classList.add("hide");
+  }
+  $("esave").onclick = saveHeadingName;
+  $("ename").onkeydown = function(e) { if (e.key === "Enter") saveHeadingName(); };
+
+  $("add").onclick = parseAndAdd;
+  $("list").onclick = function(e) {
+    var delIdx = e.target.getAttribute("data-d");
+    var editIdx = e.target.getAttribute("data-e");
+    if (delIdx !== null) {
+      e.preventDefault();
+      rows.splice(+delIdx, 1);
+      renderDesk();
+    } else if (editIdx !== null) {
+      var r = rows[+editIdx];
+      $("inp").value = r.a === null ? r.n + "=" : r.n + "=" + r.a;
+      rows.splice(+editIdx, 1);
+      renderDesk();
+      $("inp").focus();
+    }
+  };
+
+  $("clr").onclick = function() {
+    if (!rows.length) return;
+    confirmTap(this, "Clear", "Tap again to clear", function() {
+      rows = [];
+      $("errbox").classList.add("hide");
+      renderDesk();
+    });
+  };
+
+  $("gen").onclick = function() {
+    if (!rows.length) return;
+    var pending = rows.filter(function(r) { return r.a === null; }).length;
+    if (pending) {
+      var btn = this;
+      btn.textContent = pending + " entry needs value";
+      setTimeout(function() { btn.textContent = "Generate & Save Slip"; }, 2200);
+      return;
+    }
+    var partTotals = computeFiveTotals(rows);
+    var total = round2(partTotals.reduce(function(a, b) { return a + b; }, 0));
+    var slip = {
+      t: Date.now(),
+      head: heads[hi],
+      rows: rows.slice(),
+      partTotals: partTotals,
+      total: total
+    };
+    hist.unshift(slip);
+    sv("jio_play_hist_v20", hist);
+    rows = [];
+    renderDesk();
+    showSlip(slip);
+    pushToDomainApi();
+  };
+
+  $("hsearch").oninput = renderHistory;
+  $("hfilter").onchange = renderHistory;
+  $("hlist").onclick = function(e) {
+    var card = e.target.closest("[data-v]");
+    if (card) showSlip(hist[+card.getAttribute("data-v")]);
+  };
+
+  $("dsel").onchange = drawDataReport;
+  $("dcopy").onclick = function() {
+    var t = $("dtxt").value;
+    if (!t) return;
+    copyTextReliable(t, this, "Copy Report");
+  };
+  $("dreset").onclick = function() {
+    var target = $("dsel").value;
+    if (!target) return;
+    confirmTap(this, "Delete Heading Data", "Tap again to delete", function() {
+      hist = target === "*" ? [] : hist.filter(function(s) { return s.head !== target; });
+      sv("jio_play_hist_v20", hist);
+      renderDesk();
+      renderDataTab();
+      pushToDomainApi();
+    });
+  };
+
+  $("btPrint").onclick = directBluetoothPrint;
+  $("print").onclick = function() { window.print(); };
+  $("copy").onclick = function() {
+    if (!curSlip) return;
+    copyTextReliable(formatSlipText(curSlip), this, "Copy Slip");
+  };
+  $("shareBtn").onclick = function() {
+    if (!curSlip) return;
+    var text = formatSlipText(curSlip);
+    if (navigator.share) {
+      navigator.share({ title: curSlip.head, text: text }).catch(function() {});
+    } else {
+      copyTextReliable(text, this, "Share");
+    }
+  };
+  $("sdel").onclick = function() {
+    if (!curSlip) return;
+    confirmTap(this, "Delete Slip", "Tap again to delete", function() {
+      var ts = curSlip.t;
+      hist = hist.filter(function(s) { return s.t !== ts; });
+      sv("jio_play_hist_v20", hist);
+      renderDesk();
+      $("back").onclick();
+      pushToDomainApi();
+    });
+  };
+  $("back").onclick = function() {
+    resetArm($("sdel"), "Delete Slip");
+    $("slipwrap").classList.add("hide");
+    $("app").classList.remove("hide");
+    switchTab(1);
+  };
+
+  // Backup & Sync events
+  $("expJson").onclick = function() {
+    var blob = new Blob([JSON.stringify({ heads: heads, hist: hist }, null, 2)], { type: "application/json" });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "jio-play-backup-" + new Date().toISOString().slice(0, 10) + ".json";
+    a.click();
+  };
+  $("expCsv").onclick = function() {
+    var csv = ["Date,Heading,Category,Number,Amount"];
+    hist.forEach(function(s) {
+      var dt = new Date(s.t).toISOString();
+      s.rows.forEach(function(r) {
+        var cls = classifyNumber(r.n);
+        csv.push([
+          '"' + dt + '"',
+          '"' + String(s.head).replace(/"/g, '""') + '"',
+          '"' + (cls.ok ? cls.catName : "Other") + '"',
+          '"' + r.n + '"',
+          r.a
+        ].join(","));
+      });
+    });
+    var blob = new Blob([csv.join("\n")], { type: "text/csv" });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "jio-play-entries-" + new Date().toISOString().slice(0, 10) + ".csv";
+    a.click();
+  };
+  $("impBtn").onclick = function() {
+    var f = $("impFile").files[0];
+    if (!f) return;
+    var reader = new FileReader();
+    reader.onload = function() {
+      try {
+        var data = JSON.parse(reader.result);
+        if (Array.isArray(data.heads) && data.heads.length) {
+          heads = data.heads;
+          sv("jio_play_heads_v20", heads);
+          fillHeads();
+        }
+        if (Array.isArray(data.hist)) {
+          hist = data.hist;
+          sv("jio_play_hist_v20", hist);
+          renderDesk();
+        }
+        $("syncMsg").textContent = "Backup restored successfully (" + hist.length + " slips).";
+      } catch (e) {
+        $("syncMsg").textContent = "Invalid backup JSON file.";
+      }
+    };
+    reader.readAsText(f);
+  };
+
+  var savedCfg = ld("domainSync", { url: "", key: "" });
+  $("apiUrl").value = savedCfg.url || "";
+  $("apiKey").value = savedCfg.key || "";
+
+  $("saveApi").onclick = function() {
+    var cfg = { url: $("apiUrl").value.trim(), key: $("apiKey").value.trim() };
+    sv("domainSync", cfg);
+    $("syncMsg").textContent = cfg.url ? "Endpoint saved." : "Endpoint cleared.";
+  };
+  $("syncNow").onclick = pushToDomainApi;
+
+  // Boot
+  fillHeads();
+  renderDesk();
+})();
+</script>
+</body>
+</html>
